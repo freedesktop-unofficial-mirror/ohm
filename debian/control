@@ -1,0 +1,67 @@
+Source: ohm
+Section: admin
+Priority: optional
+Maintainer: Rob Taylor <rob.taylor@codethink.co.uk>
+Build-Depends: debhelper, cdbs, libdbus-glib-1-dev (>= 0.70), libglib2.0-dev, pkg-config, intltool (>= 0.22), libhal-dev (>= 0.5.7), libgtk2.0-dev (>= 2.10.0), x11proto-xext-dev, libx11-dev, x11proto-core-dev
+Standards-Version: 3.7.2
+XS-Python-Version: 2.4
+
+Package: ohm
+Architecture: any
+Depends: ${shlibs:Depends}, dbus (>= 0.60-1), lsb-base
+Description: Open Hardware Manager
+ OHM is a hardware state manager
+ .
+ OHM is a small open source systems daemon which sits above HAL and abstracts
+ out common hardware management tasks such as system wide inhibit action
+ control and controlling heat dissipation on embedded devices. OHM is built
+ using a lightweight plugin architecture. Each plugin can query data from HAL
+ or execute methods on HAL devices and expose preferences for session programs
+ to modify.
+
+Package: ohm-doc
+Architecture: all
+Section: doc
+Description: Open Hardware Manager documentation
+ OHM is a hardware state manager
+ .
+ OHM is a small open source systems daemon which sits above HAL and abstracts
+ out common hardware management tasks such as system wide inhibit action
+ control and controlling heat dissipation on embedded devices. OHM is built
+ using a lightweight plugin architecture. Each plugin can query data from HAL
+ or execute methods on HAL devices and expose preferences for session programs
+ to modify.
+
+Package: libohm1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Open Hardware Manager application interface
+ OHM is a hardware state manager
+ .
+ OHM is a small open source systems daemon which sits above HAL and abstracts
+ out common hardware management tasks such as system wide inhibit action
+ control and controlling heat dissipation on embedded devices. OHM is built
+ using a lightweight plugin architecture. Each plugin can query data from HAL
+ or execute methods on HAL devices and expose preferences for session programs
+ to modify.
+ .
+ This package contains shared libraries to be used by applications.
+
+Package: libohm-dev
+Section: libdevel
+Architecture: any
+Depends: libohm1 (= ${Source-Version}), libdbus-glib-1-dev (>= 0.70), libglib2.0-dev
+Suggests: ohm-doc
+Description: Open Hardware Manager application interface
+ OHM is a hardware state manager
+ .
+ OHM is a small open source systems daemon which sits above HAL and abstracts
+ out common hardware management tasks such as system wide inhibit action
+ control and controlling heat dissipation on embedded devices. OHM is built
+ using a lightweight plugin architecture. Each plugin can query data from HAL
+ or execute methods on HAL devices and expose preferences for session programs
+ to modify.
+ .
+ This package contains files that are needed to build applications.
+
