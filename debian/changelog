@@ -1,0 +1,5 @@
+PACKAGE (0.1.1-0) experimental; urgency=low
+
+  * Initial release.
+
+ -- Rob Taylor <rob.taylor@codethink.co.uk>  Thu, 30 Aug 2007 14:47:53 +0100
