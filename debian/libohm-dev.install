@@ -1,0 +1,5 @@
+usr/lib/libohm.la
+usr/lib/libohm.so
+usr/lib/libohm.a
+usr/lib/pkgconfig/ohm.pc
+usr/include/ohm

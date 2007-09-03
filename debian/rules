@@ -10,3 +10,4 @@ DEB_CONFIGURE_EXTRA_FLAGS := --with-xauth-dir=/user/home \
 			     --enable-docbook-docs \
 			     --enable-gtk-doc
 
+DEB_DH_INSTALL_ARGS := --sourcedir=debian/tmp

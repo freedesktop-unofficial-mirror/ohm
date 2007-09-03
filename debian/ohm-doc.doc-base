@@ -1,0 +1,10 @@
+Document: ohm
+Title: OHM Plugin Reference Manual
+Author: OHM maintainers
+Abstract: The OHM Plugin API reference
+
+Section: Apps/Programming
+
+Format: HTML
+Index: /usr/share/doc/ohm/ohm-plugin/index.html
+Files: /usr/share/doc/ohm/ohm-plugin/*.html
