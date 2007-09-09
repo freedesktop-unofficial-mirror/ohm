@@ -1,3 +1,10 @@
+ohm (0.1.1-1) sardine; urgency=low
+
+  * Fix up build depends.
+  * Add hal to depends for ohm binary package.
+
+ -- Rob Taylor <rob.taylor@codethink.co.uk>  Fri, 07 Sep 2007 03:27:43 +0100
+
 ohm (0.1.1-0) experimental; urgency=low
 
   * Initial release.
