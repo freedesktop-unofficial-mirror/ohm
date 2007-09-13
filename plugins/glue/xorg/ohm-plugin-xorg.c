@@ -32,10 +32,13 @@ static gboolean
 plugin_poll_startup (gpointer data)
 {
 	OhmPlugin *plugin = (OhmPlugin *) data;
+
+#ifdef OHM_SINGLE_USER_DEVICE
+#ifndef OHM_DEVICE_NO_XAUTH
+
 	gboolean ret;
 	const gchar *xauth;
 
-#ifdef OHM_SINGLE_USER_DEVICE
 	xauth = OHM_DEVICE_XAUTH_DIR "/.Xauthority";
 	g_debug ("xorg: testing %s", xauth);
 	ret = g_file_test (xauth, G_FILE_TEST_EXISTS);
@@ -53,14 +56,21 @@ plugin_poll_startup (gpointer data)
 		g_debug ("xorg: no .Xauthority found");
 		return TRUE;
 	}
+	setenv ("XAUTHORITY", xauth, 1);
+	g_debug ("Using XAUTHORITY %s", xauth);
+#else
+	g_debug ("Not using XAuth");
+#endif
+
 #else
 #error ConsoleKit support not yet implemented
 #endif
+
+	setenv ("DISPLAY", ":0", 1);
+
 	/* woot! X is alive */
 	g_debug ("Got X!");
 	ohm_plugin_conf_set_key (plugin, "xorg.has_xauthority", 1);
-	setenv ("XAUTHORITY", xauth, 1);
-	setenv ("DISPLAY", ":0", 1);
 	/* we don't need to poll anymore */
 	return FALSE;
 }
@@ -82,7 +92,7 @@ plugin_initialize (OhmPlugin *plugin)
 
 	/* naive try... we might be running under X */
 	ret = plugin_poll_startup (plugin);
-	if (ret == FALSE) {
+	if (ret == TRUE) {
 		/* we failed to connect to X - maybe X is not alive yet? */
 		g_debug ("Could not connect to X, polling until we can");
 		g_timeout_add (2000, plugin_poll_startup, plugin);
