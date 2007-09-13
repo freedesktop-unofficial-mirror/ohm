@@ -1,3 +1,9 @@
+ohm (0.1.1-2) experimental; urgency=low
+
+  * build --without-xauth
+
+ -- Rob Taylor <rob.taylor@codethink.co.uk>  Wed, 12 Sep 2007 16:21:13 +0100
+
 ohm (0.1.1-1) sardine; urgency=low
 
   * Fix up build depends.
