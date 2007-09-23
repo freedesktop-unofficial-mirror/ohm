@@ -11,3 +11,6 @@ DEB_CONFIGURE_EXTRA_FLAGS := --without-xauth \
 			     --enable-gtk-doc
 
 DEB_DH_INSTALL_ARGS := --sourcedir=debian/tmp
+
+install/ohm::
+	cp debian/modules.ini debian/tmp/etc/ohm/modules.ini
