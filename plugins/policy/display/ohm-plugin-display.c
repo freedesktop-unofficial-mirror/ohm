@@ -44,12 +44,15 @@ reset_brightness (OhmPlugin *plugin)
 	/* FIXME: turn on dcon -- why was this here? */
 	/* ohm_plugin_conf_set_key (plugin, "backlight.state", 1); */
 
+	g_debug("%s", G_STRFUNC);
+
 	ohm_plugin_conf_get_key (plugin, "acadapter.state", &onac);
 	if (onac == TRUE) {
 		ohm_plugin_conf_get_key (plugin, "display.value_ac", &value);
 	} else {
 		ohm_plugin_conf_get_key (plugin, "display.value_battery", &value);
 	}
+	g_debug("%s: acadapter.state = %d, setting brightness %d", G_STRFUNC, onac, value);
 
 	/* dim screen to idle brightness */
 	ohm_plugin_conf_set_key (plugin, "backlight.percent_brightness", value);
@@ -63,6 +66,8 @@ brightness_momentary (OhmPlugin *plugin, gboolean is_idle)
 	gint value;
 	gint state;
 
+	g_debug("%s", G_STRFUNC);
+
 	ohm_plugin_conf_get_key (plugin, "backlight.state", &state);
 	if (state == 0) {
 		/* work round a idletime bugs */
@@ -78,12 +83,14 @@ brightness_momentary (OhmPlugin *plugin, gboolean is_idle)
 
 	/* if not idle any more */
 	if (is_idle == FALSE) {
+		g_debug("%s: is_idle=FALSE< restting brighness", G_STRFUNC);
 		reset_brightness (plugin);
 		return;
 	}
 
 	/* dim screen to idle brightness */
 	ohm_plugin_conf_get_key (plugin, "display.value_idle", &value);
+	g_debug ("%s: Setting brightness to %d", G_STRFUNC, value);
 	ohm_plugin_conf_set_key (plugin, "backlight.percent_brightness", value);
 }
 
@@ -95,7 +102,7 @@ backlight_powersave (OhmPlugin *plugin, gboolean is_idle)
 	gint state;
 
 	ohm_plugin_conf_get_key (plugin, "backlight.state", &state);
-	if (state == 0) {
+	if (is_idle && state == 0) {
 		/* work round a idletime bugs */
 		return;
 	}
@@ -109,6 +116,7 @@ backlight_powersave (OhmPlugin *plugin, gboolean is_idle)
 
 	/* if not idle any more */
 	if (is_idle == FALSE) {
+		ohm_plugin_conf_set_key (plugin, "backlight.state", 1);
 		reset_brightness (plugin);
 		return;
 	}
